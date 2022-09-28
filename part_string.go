@@ -6,9 +6,6 @@ import (
 	"strings"
 )
 
-// StringPtr is an alias to PtrToString
-var StringPtr = PtrToString
-
 // StringEnsurePrefix returns a string, which is the original string
 // if it has the prefix, or the prefix will be added.
 func StringEnsurePrefix(s string, cut string) string {
@@ -25,16 +22,6 @@ func StringEnsureSuffix(s string, cut string) string {
 		return s
 	}
 	return s + cut
-}
-
-// StringInSlice determines whether a string is in a slice or not.
-func StringInSlice(str string, slice []string) bool {
-	for _, s := range slice {
-		if s == str {
-			return true
-		}
-	}
-	return false
 }
 
 // StringToInt converts a string to an int, errors are ignored

@@ -7,10 +7,6 @@ import (
 	"testing"
 )
 
-func TestStringPtr(t *testing.T) {
-	StringPtr("a")
-}
-
 func TestStringEnsurePrefix(t *testing.T) {
 	assertions := require.New(t)
 	assertions.Equal("https://test", StringEnsurePrefix("https://test", "https"))
@@ -21,13 +17,6 @@ func TestStringEnsureSuffix(t *testing.T) {
 	assertions := require.New(t)
 	assertions.Equal("a.log", StringEnsureSuffix("a.log", ".log"))
 	assertions.Equal("a.log", StringEnsureSuffix("a", ".log"))
-}
-
-func TestStringInSlice(t *testing.T) {
-	assertions := require.New(t)
-	assertions.False(StringInSlice("a", []string{}))
-	assertions.False(StringInSlice("a", []string{"b"}))
-	assertions.True(StringInSlice("a", []string{"a", "b"}))
 }
 
 func TestStringToInt(t *testing.T) {
