@@ -19,35 +19,33 @@ func TestSliceContains(t *testing.T) {
 
 func TestPointerTo(t *testing.T) {
 	assertions := require.New(t)
-	stringPointer := PointerTo("a")
+	stringPointer := PtrTo("a")
 	acceptStringPointer := func(p *string) string {
 		return *p
 	}
 	stringValue := acceptStringPointer(stringPointer)
 	assertions.Equal("a", stringValue)
 
-	PointerTo(true)
-	PointerTo("a")
-	PointerTo(1)
-	PointerTo(int8(1))
-	PointerTo(int16(1))
-	PointerTo(int32(1))
-	PointerTo(int64(1))
-	PointerTo(uint(1))
-	PointerTo(uint8(1))
-	PointerTo(uint16(1))
-	PointerTo(uint32(1))
-	PointerTo(uint64(1))
-	PointerTo(float32(1))
-	PointerTo(float64(1))
-
+	PtrTo(true)
 	PtrTo("a")
+	PtrTo(1)
+	PtrTo(int8(1))
+	PtrTo(int16(1))
+	PtrTo(int32(1))
+	PtrTo(int64(1))
+	PtrTo(uint(1))
+	PtrTo(uint8(1))
+	PtrTo(uint16(1))
+	PtrTo(uint32(1))
+	PtrTo(uint64(1))
+	PtrTo(float32(1))
+	PtrTo(float64(1))
 }
 
-func TestVarOr(t *testing.T) {
+func TestValueOr(t *testing.T) {
 	assertions := require.New(t)
-	assertions.Equal("t", VarOr("t", "default text"))
-	assertions.Equal("default text", VarOr("", "default text"))
+	assertions.Equal("t", ValueOr("t", "default text"))
+	assertions.Equal("default text", ValueOr("", "default text"))
 	assertions.Equal(1, VarOr(1, 99))
 	assertions.Equal(99, VarOr(0, 99))
 	assertions.Equal(int8(1), VarOr(int8(1), int8(99)))
