@@ -126,3 +126,16 @@ func TestStringRand(t *testing.T) {
 	s := StringRand(8)
 	assertions.Len(s, 8)
 }
+
+func TestStringRandWithCharset(t *testing.T) {
+	assertions := require.New(t)
+	s := StringRandWithCharset(8, "1234567890")
+	assertions.Len(s, 8)
+}
+
+func TestStringRandWithCharsetAndPrefix(t *testing.T) {
+	assertions := require.New(t)
+	assertions.False(StringIsValidEmail("invalid"))
+	assertions.False(StringIsValidEmail("Me <me@gmail.com>"))
+	assertions.True(StringIsValidEmail("me@gmail.com"))
+}

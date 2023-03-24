@@ -2,6 +2,7 @@ package mc
 
 import (
 	"math/rand"
+	"net/mail"
 	"strconv"
 	"strings"
 )
@@ -104,4 +105,9 @@ func StringRandWithCharset(length int, charset string) string {
 // StringRand generates random string with specific length.
 func StringRand(length int) string {
 	return StringRandWithCharset(length, CharsetDefault)
+}
+
+func StringIsValidEmail(s string) bool {
+	addr, err := mail.ParseAddress(s)
+	return err == nil && addr.Address == s
 }
