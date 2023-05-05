@@ -27,8 +27,8 @@ func WithTemplatePath(templatePath string) OpenOrCreateOptionFunc {
 	}
 }
 
-// EnsureFileExist ensures the file exist, creates it with a template if not.
-func EnsureFileExist(filePath string, optionFuncs ...OpenOrCreateOptionFunc) error {
+// EnsureFileExists ensures the file exist, creates it with a template if not.
+func EnsureFileExists(filePath string, optionFuncs ...OpenOrCreateOptionFunc) error {
 	options := &OpenOrCreateOptions{}
 	for _, optionFunc := range optionFuncs {
 		if err := optionFunc(options); err != nil {
@@ -88,7 +88,7 @@ func EnsureFileExist(filePath string, optionFuncs ...OpenOrCreateOptionFunc) err
 
 // OpenOrCreate opens the file, creates it with a template if not.
 func OpenOrCreate(filePath string, optionFuncs ...OpenOrCreateOptionFunc) (*os.File, error) {
-	if err := EnsureFileExist(filePath, optionFuncs...); err != nil {
+	if err := EnsureFileExists(filePath, optionFuncs...); err != nil {
 		return nil, err
 	}
 	return os.Open(filePath)
