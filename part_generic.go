@@ -19,14 +19,22 @@ func PtrTo[V any](v V) *V {
 }
 
 // ValueOr returns the default value if the value is empty
-func ValueOr[V comparable](v V, defaultValue V) V {
+func ValueOr[V comparable](v V, alternatives ...V) V {
 	zero := new(V)
 	if v == *zero {
-		return defaultValue
+		if len(alternatives) == 0 {
+			return *zero
+		}
+		for _, alternative := range alternatives {
+			if alternative != *zero {
+				return alternative
+			}
+		}
+		return alternatives[len(alternatives)-1]
 	}
 	return v
 }
 
-func VarOr[V comparable](v V, defaultValue V) V {
-	return ValueOr(v, defaultValue)
+func VarOr[V comparable](v V, alternatives ...V) V {
+	return ValueOr(v, alternatives...)
 }

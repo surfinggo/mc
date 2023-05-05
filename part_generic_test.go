@@ -46,6 +46,8 @@ func TestValueOr(t *testing.T) {
 	assertions := require.New(t)
 	assertions.Equal("t", ValueOr("t", "default text"))
 	assertions.Equal("default text", ValueOr("", "default text"))
+	assertions.Equal("default text", ValueOr("", "", "", "default text", "low priority"))
+	assertions.Equal("default text", ValueOr("", "default text", "low priority"))
 	assertions.Equal(1, VarOr(1, 99))
 	assertions.Equal(99, VarOr(0, 99))
 	assertions.Equal(int8(1), VarOr(int8(1), int8(99)))
