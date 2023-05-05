@@ -13,14 +13,14 @@ type OpenOrCreateOptions struct {
 
 type OpenOrCreateOptionFunc func(o *OpenOrCreateOptions) error
 
-func WithTemplate(template string) OpenOrCreateOptionFunc {
+func OpenOrCreateWithTemplate(template string) OpenOrCreateOptionFunc {
 	return func(o *OpenOrCreateOptions) error {
 		o.Template = template
 		return nil
 	}
 }
 
-func WithTemplatePath(templatePath string) OpenOrCreateOptionFunc {
+func OpenOrCreateWithTemplatePath(templatePath string) OpenOrCreateOptionFunc {
 	return func(o *OpenOrCreateOptions) error {
 		o.TemplatePath = templatePath
 		return nil
