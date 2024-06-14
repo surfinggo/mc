@@ -9,6 +9,24 @@ func SliceContains[V comparable](slice []V, v V) bool {
 	return false
 }
 
+func SliceFilter[V any](slice []V, f func(V) bool) []V {
+	var result []V
+	for _, s := range slice {
+		if f(s) {
+			result = append(result, s)
+		}
+	}
+	return result
+}
+
+func SliceMap[V any, R any](slice []V, f func(V) R) []R {
+	var result []R
+	for _, s := range slice {
+		result = append(result, f(s))
+	}
+	return result
+}
+
 // PointerTo creates a pointer to bool
 func PointerTo[V any](v V) *V {
 	return &v

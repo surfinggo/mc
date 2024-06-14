@@ -17,6 +17,99 @@ func TestSliceContains(t *testing.T) {
 	assertions.False(SliceContains([]float64{1, 2}, float64(0)))
 }
 
+func TestSliceFilter(t *testing.T) {
+	cases := []struct {
+		message  string
+		actual   any
+		expected any
+	}{
+		{
+			message: "filtering a slice of strings",
+			actual: SliceFilter([]string{"a", "b"}, func(s string) bool {
+				return s == "a"
+			}),
+			expected: []string{"a"},
+		},
+		{
+			message: "filtering a slice of ints",
+			actual: SliceFilter([]int{1, 2}, func(i int) bool {
+				return i == 1
+			}),
+			expected: []int{1},
+		},
+		{
+			message: "filtering a slice of uints",
+			actual: SliceFilter([]uint{uint(1), uint(2)}, func(i uint) bool {
+				return i == uint(1)
+			}),
+			expected: []uint{uint(1)},
+		},
+		{
+			message: "filtering a slice of floats",
+			actual: SliceFilter([]float64{float64(1), float64(2)}, func(i float64) bool {
+				return i == float64(1)
+			}),
+			expected: []float64{float64(1)},
+		},
+		{
+			message: "filtering empty strings",
+			actual: SliceFilter([]string{"", "a", "b"}, func(s string) bool {
+				return s != ""
+			}),
+			expected: []string{"a", "b"},
+		},
+	}
+
+	assertions := require.New(t)
+
+	for _, c := range cases {
+		assertions.Equal(c.expected, c.actual, "Filtering error, test case: %s", c.message)
+	}
+}
+
+func TestSliceMap(t *testing.T) {
+	cases := []struct {
+		message  string
+		actual   any
+		expected any
+	}{
+		{
+			message: "mapping a slice of strings",
+			actual: SliceMap([]string{"a", "b"}, func(s string) string {
+				return s + "_mapped"
+			}),
+			expected: []string{"a_mapped", "b_mapped"},
+		},
+		{
+			message: "mapping a slice of ints",
+			actual: SliceMap([]int{1, 2}, func(i int) int {
+				return i + 1
+			}),
+			expected: []int{2, 3},
+		},
+		{
+			message: "mapping a slice of uints",
+			actual: SliceMap([]uint{uint(1), uint(2)}, func(i uint) uint {
+				return i + 1
+			}),
+			expected: []uint{uint(2), uint(3)},
+		},
+		{
+			message: "mapping a slice of floats",
+			actual: SliceMap([]float64{float64(1), float64(2)}, func(i float64) float64 {
+				return i + 0.1
+			}),
+			expected: []float64{float64(1.1), float64(2.1)},
+		},
+	}
+
+	assertions := require.New(t)
+
+	for _, c := range cases {
+		assertions.Equal(c.expected, c.actual, "Mapping error, test case: %s", c.message)
+	}
+}
+
 func TestPointerTo(t *testing.T) {
 	assertions := require.New(t)
 	stringPointer := PtrTo("a")
